@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Mailman</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Mailman Animation */
+        #mailman-container {
+            position: absolute;
+            left: -200px;
+            bottom: 20%;
+            transition: all 2s ease-out;
+            text-align: center;
+        }
+
+        .mailman-emoji {
+            font-size: 80px;
+            display: block;
+        }
+
+        .speech-bubble {
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+            border: 2px solid #333;
+            margin-bottom: 10px;
+            position: relative;
+            display: none;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 50px;
+            border: none;
+            background-color: #ff9800;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #f57c00;
+        }
+
+        /* Mail Content */
+        #mail-content {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h2 { color: #2e7d32; }
+
+        /* Biryani Image Styling */
+        #biryani {
+            width: 250px;
+            cursor: pointer;
+            display: none;
+            margin-top: 20px;
+            border-radius: 15px;
+            transition: filter 0.3s;
+        }
+
+        #biryani:hover {
+            filter: brightness(1.1);
+        }
+
+        .error-msg {
+            color: #d32f2f;
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mailman-container">
+        <div class="speech-bubble" id="bubble">Hi there! 👋</div>
+        <span class="mailman-emoji">🏃‍♂️📬</span>
+    </div>
+
+    <button id="get-mail-btn" onclick="openMail()">You've got mail!</button>
+
+    <div id="mail-content">
+        <h2>Don't be worried, be happy! 😊</h2>
+        <button id="double-btn" style="display:inline-block;" onclick="showBiryani()">
+            Click here to double your happiness!
+        </button>
+        
+        <br>
+        <img id="biryani" src="https://img.freepik.com/free-photo/chicken-biryani-luxury-rice-dish-with-spices-white-background_123827-23425.jpg" 
+             alt="Biryani" onclick="triggerError()">
+        
+        <p id="biryani-text" style="display:none;">Click on the Biryani!</p>
+        <div id="error-msg" class="error-msg">❌ Pineapple not found!</div>
+    </div>
+
+    <script>
+        // 1. Mailman arrives and waves
+        window.onload = () => {
+            const mailman = document.getElementById('mailman-container');
+            const bubble = document.getElementById('bubble');
+            const btn = document.getElementById('get-mail-btn');
+
+            setTimeout(() => {
+                mailman.style.left = '50%';
+                mailman.style.transform = 'translateX(-50%)';
+            }, 500);
+
+            setTimeout(() => {
+                bubble.style.display = 'block';
+            }, 2500);
+
+            setTimeout(() => {
+                btn.style.display = 'block';
+            }, 3500);
+        };
+
+        // 2. Open the mail
+        function openMail() {
+            document.getElementById('mailman-container').style.display = 'none';
+            document.getElementById('get-mail-btn').style.display = 'none';
+            document.getElementById('mail-content').style.display = 'block';
+        }
+
+        // 3. Show Biryani
+        function showBiryani() {
+            document.getElementById('double-btn').style.display = 'none';
+            document.getElementById('biryani').style.display = 'inline-block';
+            document.getElementById('biryani-text').style.display = 'block';
+        }
+
+        // 4. Trigger the Pineapple error
+        function triggerError() {
+            document.getElementById('error-msg').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
